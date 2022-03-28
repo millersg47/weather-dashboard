@@ -30,3 +30,24 @@ body {
 .custom-card {
     background-color: var(--light);
 }
+
+/* not applying the light text color to the 'weather dashboard' text in navbar. Need to fix. */
+.navbar-content {
+    color: var(--light);
+}
+
+.navbar-content:hover {
+    cursor:pointer;
+}
+
+.uv-good {
+    background-color: red;
+}
+
+.uv-ok {
+    background-color: yellow;
+}
+
+.uv-bad {
+    background-color: green;
+}
