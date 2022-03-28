@@ -1,0 +1,32 @@
+:root {
+    --blue: #387D7A;
+    --light: #DED6D6;
+    --neutral: #454955;
+
+}
+
+* {
+    font-family: 'Oswald', sans-serif;
+}
+
+body {
+    color: var (--light);
+}
+
+.navbar-custom {
+    background-color: var(--blue);
+}
+
+.btn-custom {
+    width: 100%;
+    background-color: var(--blue);
+    color: var(--light);
+}
+
+.custom-border {
+    border: solid 1px var(--blue);
+}
+
+.custom-card {
+    background-color: var(--light);
+}
