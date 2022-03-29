@@ -1,13 +1,10 @@
 var searchBtnEl = $(".search-btn");
 var reloadEl = $(".navbar-content");
-var cityInput = $(".input-field");
+var userCity = $(".input-field").val();
 var searchedUl = $(".searched-cities");
 var dateEl = $(".date");
 var weatherApiKey = "ca2644c88ede23db704959631753520b";
 var today = moment();
-var userCity;
-var userState;
-var userCountry; 
 var longitude;
 var latitude;
 
@@ -26,6 +23,26 @@ function getWeatherApi() {
 
             }
         });
-}
+};
+//holds the url to access the geocoding API using the city and state or country entered by user. 
+var geocodeUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + userCity + "&limit=1&appid=" + weatherApiKey;
 
-var geocodeUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + userCity + "," + userState + "," + userCountry +"&limit=1&appid=" + weatherApiKey;
+function searchBtnHandler(event) {
+    event.preventDefault();
+    console.log(userCity);
+
+    fetch(geocodeUrl)
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        console.log(data);
+    });
+
+
+
+};
+
+searchBtnEl.on("click", searchBtnHandler);
+
+
