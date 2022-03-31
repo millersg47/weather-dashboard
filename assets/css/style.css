@@ -40,14 +40,11 @@ body {
     cursor:pointer;
 }
 
-.uv-good {
-    background-color: red;
+.uv-bkg {
+    border-radius: 5px;
 }
 
-.uv-ok {
-    background-color: yellow;
-}
-
-.uv-bad {
-    background-color: green;
+.icon {
+    width: auto;
+    height: 25px;
 }

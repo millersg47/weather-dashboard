@@ -2,12 +2,14 @@ var searchBtnEl = document.querySelector(".search-btn");
 var reloadEl = document.querySelector(".navbar-content");
 var inputEl = document.querySelector(".input-field");
 var searchedCitiesEl = document.querySelectorAll(".searched-city");
+var searchHistContainer = document.querySelector(".search-history");
 var searchedCitiesText = JSON.parse(localStorage.getItem("searchedCity"))||[];
 var placeHeading = document.querySelector(".city-name");
 var dateEl = document.querySelector(".date");
 var weatherApiKey = "ca2644c88ede23db704959631753520b";
 var today = moment();
 var currentConditions = document.querySelectorAll(".city-specific");
+var currentIconEl = document.querySelector(".icon");
 var forecastDateEls = document.querySelectorAll(".date-forecast");
 console.log(forecastDateEls);
 
@@ -29,12 +31,20 @@ function searchBtnHandler(event) {
      localStorage.setItem("searchedCity", JSON.stringify(searchedCitiesText));
 
 
-    for(var i = 0; i < searchedCitiesText.length; i++) {
+    for(var i = 0; i < searchedCitiesEl.length; i++) {
         searchedCitiesEl[i].textContent = searchedCitiesText[i];
-    
     }
 
      searchCity(userCity);
+};
+
+function cityBtnHandler(event) {
+    event.preventDefault();
+    var userCity = event.target.textContent;
+
+    placeHeading.innerHTML = userCity;
+
+    searchCity(userCity);
 };
 
 function pageLoad() {
@@ -42,11 +52,10 @@ function pageLoad() {
     //replaces city name in current weather box
     placeHeading.innerHTML = userCity;
     
-    for(var i = 0; i < searchedCitiesText.length; i++) {
+    for(var i = 0; i < searchedCitiesEl.length; i++) {
         searchedCitiesEl[i].textContent = searchedCitiesText[i];
-    
     }
-    searchedCitiesText
+   
     searchCity(userCity);
 }
 
@@ -87,20 +96,31 @@ function searchCity (userCity) {
                 var currentWind = data.current.wind_speed;
                 var currentHumidity = data.current.humidity;
                 var currentUv = data.current.uvi;
+                var currentIcon = data.current.weather[0].icon;
                 var currentData = [];
+
+                currentIconEl.src = "http://openweathermap.org/img/wn/" + currentIcon + "@2x.png";
+
                 currentData.push(currentTemp, currentWind, currentHumidity, currentUv);
                 console.log(currentData);
     
-                // need to work on the weather icon var. This is not working (reading zero as undefined)
-                // var currentWeatherIcon = data.weather[0].icon;
-                // console.log(currentWeatherIcon);
+                
                 console.log(currentConditions);
                 //for loop to pass the currentData values into the currentConditions array. Not working
                 for (var i = 0; i < currentConditions.length; i++) {
-                    console.log("hello");
                     currentConditions[i].innerHTML = currentData[i];
                 }
-    
+
+                var uvStatus = document.querySelector(".uv-specific");
+                if(currentUv <=2) {
+                    uvStatus.style.backgroundColor = "#8EC442";
+                } else if(currentUv >=8) {
+                    uvStatus.style.backgroundColor = "#D2394A";
+                } else {
+                    uvStatus.style.backgroundColor = "#FDD835";
+                }
+
+               
                 for (var i = 0; i < forecastDateEls.length; i++) {
                     var time = data.daily[i+1].dt;
                     var date = moment(time*1000);
@@ -125,3 +145,4 @@ function searchCity (userCity) {
 }
 
 searchBtnEl.addEventListener("click", searchBtnHandler);
+searchHistContainer.addEventListener("click", cityBtnHandler);
