@@ -21,8 +21,9 @@ function searchBtnHandler(event) {
     //replaces city name in current weather box
     placeHeading.innerHTML = userCity;
 
-    //adds city name to buttons storing recent searches under searchbar. Need to work on this.
+    //adds city name to buttons storing recent searches under searchbar. Need to work on this so it adds the searchedCitiesText to next available button.
     searchedCitiesText.push(userCity);
+    console.log(searchedCitiesText);
 
 
     //holds the url to access the geocoding API using the city and state or country entered by user. 
