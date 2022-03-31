@@ -7,9 +7,11 @@ var placeHeading = document.querySelector(".city-name");
 var dateEl = document.querySelector(".date");
 var weatherApiKey = "ca2644c88ede23db704959631753520b";
 var today = moment();
+var currentConditions = document.querySelectorAll("city-specific");
+console.log(currentConditions);
 
 
-//adds current date to the span
+//adds current date to span
 dateEl.append(today.format("(MM/DD/YYYY)"));
 
 function searchBtnHandler(event) {
@@ -26,7 +28,7 @@ function searchBtnHandler(event) {
     console.log(searchedCitiesText);
 
 
-    //holds the url to access the geocoding API using the city and state or country entered by user. 
+    //holds the url to access the geocoding API using the city entered by user. 
     var geocodeUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + userCity + "&limit=1&appid=" + weatherApiKey;
 
     fetch(geocodeUrl)
@@ -37,10 +39,8 @@ function searchBtnHandler(event) {
         console.log(data);
         var latitude = data[0].lat;
         var longitude = data[0].lon;
-        console.log(latitude);
-        console.log(longitude);
 
-         //holds the url to access the open weather API using globally defined variables
+         //holds the url to access the open weather API using defined variables based on the lon lat data from the geocoding API
         var weatherRequestUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude +"&lon=" + longitude +"&units=imperial&appid=" + weatherApiKey;
 
 
@@ -50,13 +50,31 @@ function searchBtnHandler(event) {
         })
         .then(function (data) {
             console.log(data);
-            var currentTemp = data[0].current.temp;
-            var currentWind = data[0].current.wind_speed;
-            var currentHumidity = data[0].current.humidity;
-            var currentUv = data[0].current.uvi;
-            var currentWeatherIcon = data[0].current.weather[0].icon;
+            var currentTemp = data.current.temp;
+            var currentWind = data.current.wind_speed;
+            var currentHumidity = data.current.humidity;
+            var currentUv = data.current.uvi;
+            var currentData = [];
+            currentData.push(currentTemp, currentWind, currentHumidity, currentUv);
+            console.log(currentData);
+
+            // need to work on the weather icon var. This is not working (reading zero as undefined)
+            // var currentWeatherIcon = data.weather[0].icon;
+            // console.log(currentWeatherIcon);
+
+            for (var i = 0; i < currentConditions.length; i++) {
+                currentConditions[i].textContent = currentData[i].value;
+            }
+
 
         });
+
+        //prompt user to enter a new city if the first city searched returns no data
+        if (!data) {
+            console.log('No results found!');
+            resultContentEl.innerHTML = '<h3>No weather data found, try another city!</h3>';
+            return;
+        }
     });
 };
 
