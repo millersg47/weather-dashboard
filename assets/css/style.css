@@ -44,7 +44,16 @@ body {
     border-radius: 5px;
 }
 
-.icon {
+.current-icon {
     width: auto;
-    height: 25px;
+    height: 35px;
+    background-color: var(--neutral);
+    border-radius: 5px;
+}
+
+.forecast-icon {
+    width: auto;
+    height: 20px;
+    background-color: var(--neutral);
+    border-radius: 5px;
 }

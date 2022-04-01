@@ -9,7 +9,7 @@ var dateEl = document.querySelector(".date");
 var weatherApiKey = "ca2644c88ede23db704959631753520b";
 var today = moment();
 var currentConditions = document.querySelectorAll(".city-specific");
-var currentIconEl = document.querySelector(".icon");
+var currentIconEl = document.querySelector(".current-icon");
 var forecastDateEls = document.querySelectorAll(".date-forecast");
 console.log(forecastDateEls);
 
@@ -128,10 +128,13 @@ function searchCity (userCity) {
                     forecastDateEls[i].innerHTML = date.format("dddd");
                 }   
     
+                var forecastIconEl = document.querySelectorAll(".forecast-icon");
                 var temp = document.querySelectorAll(".temp");
                 var wind = document.querySelectorAll(".wind");
                 var humidity = document.querySelectorAll(".humidity");
                 for (var i = 0; i < forecastDateEls.length; i++) {
+                    var forecastIconData = data.daily[i+1].weather[0].icon;
+                    forecastIconEl[i].src = "http://openweathermap.org/img/wn/" + forecastIconData + "@2x.png";
                     temp[i].innerHTML = data.daily[i+1].temp.max;
                     wind[i].innerHTML = data.daily[i+1].wind_speed;
                     humidity[i].innerHTML = data.daily[i+1].humidity;
