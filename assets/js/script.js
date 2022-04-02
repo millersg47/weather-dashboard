@@ -64,7 +64,7 @@ pageLoad();
 function searchCity (userCity) {
 
         //holds the url to access the geocoding API using the city entered by user. 
-        var geocodeUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + userCity + "&limit=1&appid=" + weatherApiKey;
+        var geocodeUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + userCity + "&limit=1&appid=" + weatherApiKey;
 
 
         fetch(geocodeUrl)
@@ -99,7 +99,7 @@ function searchCity (userCity) {
                 var currentIcon = data.current.weather[0].icon;
                 var currentData = [];
 
-                currentIconEl.src = "http://openweathermap.org/img/wn/" + currentIcon + "@2x.png";
+                currentIconEl.src = "https://openweathermap.org/img/wn/" + currentIcon + "@2x.png";
 
                 currentData.push(currentTemp, currentWind, currentHumidity, currentUv);
                 console.log(currentData);
@@ -134,7 +134,7 @@ function searchCity (userCity) {
                 var humidity = document.querySelectorAll(".humidity");
                 for (var i = 0; i < forecastDateEls.length; i++) {
                     var forecastIconData = data.daily[i+1].weather[0].icon;
-                    forecastIconEl[i].src = "http://openweathermap.org/img/wn/" + forecastIconData + "@2x.png";
+                    forecastIconEl[i].src = "https://openweathermap.org/img/wn/" + forecastIconData + "@2x.png";
                     temp[i].innerHTML = data.daily[i+1].temp.max;
                     wind[i].innerHTML = data.daily[i+1].wind_speed;
                     humidity[i].innerHTML = data.daily[i+1].humidity;
