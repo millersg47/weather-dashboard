@@ -26,7 +26,7 @@ function searchBtnHandler(event) {
      placeHeading.innerHTML = userCity;
 
      //adds city name to buttons storing recent searches under searchbar
-     searchedCitiesText.push(userCity);
+     searchedCitiesText.unshift(userCity);
      console.log(searchedCitiesText);
      localStorage.setItem("searchedCity", JSON.stringify(searchedCitiesText));
 
