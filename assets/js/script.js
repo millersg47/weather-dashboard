@@ -4,6 +4,7 @@ var inputEl = document.querySelector(".input-field");
 var searchedCitiesEl = document.querySelectorAll(".searched-city");
 var searchHistContainer = document.querySelector(".search-history");
 var searchedCitiesText = JSON.parse(localStorage.getItem("searchedCity"))||[];
+console.log(searchedCitiesText);
 var placeHeading = document.querySelector(".city-name");
 var dateEl = document.querySelector(".date");
 var weatherApiKey = "ca2644c88ede23db704959631753520b";
