@@ -7,6 +7,11 @@ The webpage is linked [here](https://millersg47.github.io/weather-dashboard/).
 
 ![The weather dashboard application is shown with weather data for Houston populated, and search history listed in clickable buttons on left side of page.](./assets/weather-dash.png)
 
+![The weather dashboard application is shown with weather data for Seattle populated, and search history listed in clickable buttons on left side of page.](./assets/weather-dash-2.png)
+
+## TECHNOLOGIES USED
+HTML, CSS, Javascript, moment.js, Bootstrap, Google Fonts, OpenWeather API, Geocoding API
+
 ## INSTALLATION
 Install app locally by cloning the git repo and use a text editor to manipulate the code. 
 
@@ -18,3 +23,9 @@ Use the application to view current and 5-day forecast weather in different loca
 
 ## CREDITS
 No other contributors are involved in the project. 
+
+## LICENSE
+MIT license applied in LICENSE.txt file.
+
+## CONTACT
+Sophie Miller, millersg47@gmail.com
